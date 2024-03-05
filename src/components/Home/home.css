@@ -1,0 +1,19 @@
+.body_content {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: #e6f0f0;
+  width: 100%;
+  padding-top: 68px;
+}
+.dashboard_wrap {
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}

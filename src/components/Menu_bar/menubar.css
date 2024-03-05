@@ -1,0 +1,31 @@
+.menu_name{
+    font-size: 15px;
+    color: blue;
+    color: grey;
+    /* background-color: aqua; */
+}
+.menus{
+    
+    /* margin-left: 10px; */
+    height: 35px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-left: 15px;
+    display: flex;
+    color: #224848;
+    font-size: 14px;
+    
+
+}
+
+.menu-link{
+    text-decoration: none;
+    
+}
+.menus:hover{
+    background-color: #076d6d;
+    color: white;
+}
+
