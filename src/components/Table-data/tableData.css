@@ -91,7 +91,7 @@ button {
 .view-button {
   background-color: #076d6d;
   color: #ffffff;
-  border-radius: 0;
+  border-radius: 4px;
   border: none;
   height: 25px;
   width: 50px;

@@ -14,6 +14,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 // import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import EmployeeInfo from "../EmployeeInfo/employeeInfo";
+import { useState } from "react";
 // import EmployeeInfo from "../EmployeeInfo/employeeInfo";
 
 
@@ -65,8 +67,18 @@ const rows = [
 ];
 
 export default function TableData() {
-    
+  // let modalTitle='usamm kutti'
+  const[modalTitle,setModalTitle] = useState("Title")
+  const[modalsave,setModalSave] = useState("Save")
+  const [showModal, setShowModal] = useState(false);
+  function callingModal(title,save){
+    setModalTitle(title)
+    setModalSave(save)
+    handleShow()
+  }
 
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
   return (
     <div style={{ display: "flex" }}>
       <Nav_bar />
@@ -179,9 +191,10 @@ export default function TableData() {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <button className="add-button">
+              <button className="add-button" onClick={()=>callingModal("Add Employee","Save")}>
                 <FaRegUser /> Add Driver
               </button>
+              <EmployeeInfo showModal={showModal} closeModal={handleClose} title={modalTitle} save={modalsave}/>
             </div>
           </div>
         </div>
@@ -218,7 +231,7 @@ export default function TableData() {
                     <TableCell className="table-body">{row.protein}</TableCell>
                     <TableCell className="table-body">{row.protein}</TableCell>
                     <TableCell className="table-body">
-                      <button className="view-button">Edit</button>
+                      <button className="view-button" onClick={()=>callingModal("Edit Employee","Save Edit")}>Edit</button>
                     </TableCell>
                   </TableRow>
                 ))}
