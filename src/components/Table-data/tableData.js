@@ -16,8 +16,9 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import EmployeeInfo from "../EmployeeInfo/employeeInfo";
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import EditModal from "../EditModal/editModal";
 // import EmployeeInfo from "../EmployeeInfo/employeeInfo";
-
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -34,51 +35,41 @@ const rows = [
     "04-03-2024",
     "04-03-2024"
   ),
-
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
-  createData("DRV5", "Abu", 9876543210, "04-03-2024", "04-03-2024"),
 ];
 
 export default function TableData() {
   // let modalTitle='usamm kutti'
-  const[modalTitle,setModalTitle] = useState("Title")
-  const[modalsave,setModalSave] = useState("Save")
+
+  const [tableData, setTableData] = useState([]);
+
+  const handleFormSubmit = (data) => {
+    setTableData([...tableData, data]);
+  };
+
+  const [modalTitle, setModalTitle] = useState("Title");
+  const [modalsave, setModalSave] = useState("Save");
   const [showModal, setShowModal] = useState(false);
-  function callingModal(title,save){
-    setModalTitle(title)
-    setModalSave(save)
-    handleShow()
+  const [editmodalShow, setEditModalShow] = useState(false);
+  const [passingID, setPassingID] = useState();
+  function callingModal(title, save) {
+    setModalTitle(title);
+    setModalSave(save);
+    handleShow();
+  }
+
+  function callEditModal(id) {
+    console.log("Editing todo with ID:", id);
+    // console.log(tableData);
+    editModalShow()
+    setPassingID(id);
   }
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
+
+  const editModalShow = () => setEditModalShow(true);
+  const editModalClose = () => setEditModalShow(false);
+
   return (
     <div style={{ display: "flex" }}>
       <Nav_bar />
@@ -191,10 +182,25 @@ export default function TableData() {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <button className="add-button" onClick={()=>callingModal("Add Employee","Save")}>
+              <button
+                className="add-button"
+                onClick={() => callingModal("Add Employee")}
+              >
                 <FaRegUser /> Add Driver
               </button>
-              <EmployeeInfo showModal={showModal} closeModal={handleClose} title={modalTitle} save={modalsave}/>
+              <EmployeeInfo
+                showModal={showModal}
+                closeModal={handleClose}
+                title={modalTitle}
+                save={modalsave}
+                onFormSubmit={handleFormSubmit}
+              />
+              <EditModal
+                showModal={editmodalShow}
+                closeModal={editModalClose}
+                id={passingID}
+                dataArray={tableData}
+              />
             </div>
           </div>
         </div>
@@ -202,36 +208,38 @@ export default function TableData() {
           <TableContainer className="table-container">
             <Table aria-label="simple table">
               <TableHead>
-                <TableRow>
-                  <TableCell className="table-head">Driver_ID</TableCell>
-                  <TableCell className="table-head">Name</TableCell>
-                  <TableCell className="table-head">Contact Number</TableCell>
-                  <TableCell className="table-head">Vehicle Type</TableCell>
-                  <TableCell className="table-head">Vehicle Number</TableCell>
-                  <TableCell className="table-head">Joining Date</TableCell>
-                  <TableCell className="table-head"></TableCell>
-                </TableRow>
+                <TableCell className="table-head">{"Driver_ID"}</TableCell>
+                <TableCell className="table-head">{"Name"}</TableCell>
+                <TableCell className="table-head">{"Number"}</TableCell>
+                <TableCell className="table-head">{"Vehicle Type"}</TableCell>
+                <TableCell className="table-head">{"Vehicle Number"}</TableCell>
+                <TableCell className="table-head">{"Joining Date"}</TableCell>
+                <TableCell className="table-head"></TableCell>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      className="table-body"
-                    >
-                      {row.name}
-                    </TableCell>
-                    <TableCell className="table-body">{row.calories}</TableCell>
-                    <TableCell className="table-body">{row.fat}</TableCell>
-                    <TableCell className="table-body">{row.carbs}</TableCell>
-                    <TableCell className="table-body">{row.protein}</TableCell>
-                    <TableCell className="table-body">{row.protein}</TableCell>
+                {tableData.map((row, index) => (
+                  <TableRow key={row.id}>
                     <TableCell className="table-body">
-                      <button className="view-button" onClick={()=>callingModal("Edit Employee","Save Edit")}>Edit</button>
+                      {row.driver_ID}
+                    </TableCell>
+                    <TableCell className="table-body">{row.name}</TableCell>
+                    <TableCell className="table-body">{row.number}</TableCell>
+                    <TableCell className="table-body">
+                      {row.vehicleType}
+                    </TableCell>
+                    <TableCell className="table-body">
+                      {row.vehicleNumber}
+                    </TableCell>
+                    <TableCell className="table-body">
+                      {row.joiningDate}
+                    </TableCell>
+                    <TableCell className="table-body">
+                      <Button
+                        className="add-button"
+                        onClick={() => callEditModal(row.id)}
+                      >
+                        Edit
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

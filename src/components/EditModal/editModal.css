@@ -1,0 +1,81 @@
+
+
+.formGroup1{
+    width: 50%;
+    /* background-color: aqua; */
+ }
+ .inputName{
+     width: 100%;
+ }
+ .label{
+     padding: 5px;
+     color: #076d6d;
+     font-weight: bold;
+ }
+ .formRow{
+     display: flex;
+     gap: 10px;
+ }
+ .viewForm{
+     display: flex;
+     flex-direction: column !important;
+     gap: 10px;
+ }
+ input{
+     height:33px;
+     border-radius: 5px;
+     border: none ;
+     padding: 10px;
+     outline-color: #076d6d ;
+     /* color: #076d6d; */
+ }
+ .modalBody{
+     background-color: #e6f0f0;
+ }
+ /* 
+ input:focus{
+     border-color: #076d6d !important;
+ } */
+ 
+ .editButton{
+     background-color: #076d6d;
+     color: white;
+     border: none;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     
+ }
+ .closeButton{
+     border: none;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     
+ }
+ .editButton:hover{
+     background-color: #0b5858;
+ }
+ .editButton:active{
+     background-color: #0b5858 !important;
+ }
+ 
+ @media screen and (max-width: 500px) {
+     .formRow{
+         display: flex;
+         flex-direction: column;
+         gap: 10px;
+     }
+     .formGroup1{
+         width: 100%;
+      }
+     input{
+         height:33px;
+         border-radius: 5px;
+         border: none ;
+         padding: 10px;
+         outline-color: #076d6d ;
+         /* color: #076d6d; */
+         width: 100%;
+     }
+ }
