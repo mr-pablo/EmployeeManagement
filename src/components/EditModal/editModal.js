@@ -65,6 +65,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Driver_ID</div>
                   <input
+                  required
                     value={foundObject.driver_ID}
                     placeholder="DRV_001"
                     type="text"
@@ -76,6 +77,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Name</div>
                   <input
+                  required
                     value={foundObject.name}
                     type="text"
                     placeholder="Name"
@@ -89,6 +91,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Contact Number</div>
                   <input
+                  required
                     value={foundObject.number}
                     type="number"
                     placeholder="9876543210"
@@ -100,6 +103,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Vehicle Type</div>
                   <input
+                  required
                     value={foundObject.vehicleType}
                     type="text"
                     placeholder="Vehicle Type"
@@ -113,6 +117,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Vehicle Number</div>
                   <input
+                  required
                     value={foundObject.vehicleNumber}
                     type="text"
                     placeholder="Vehicle Number"
@@ -124,6 +129,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Joining Date</div>
                   <input
+                  required
                     value={foundObject.joiningDate}
                     type="date"
                     className="inputName"

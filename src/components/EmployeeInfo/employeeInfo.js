@@ -74,6 +74,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Driver_ID</div>
                 <input
+                required
                   value={formData.driver_ID}
                   placeholder="DRV_001"
                   type="text"
@@ -85,6 +86,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Name</div>
                 <input
+                required
                   value={formData.name}
                   type="text"
                   placeholder="Name"
@@ -98,6 +100,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Contact Number</div>
                 <input
+                required
                   value={formData.number}
                   type="number"
                   placeholder="9876543210"
@@ -109,6 +112,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Vehicle Type</div>
                 <input
+                required
                   value={formData.vehicleType}
                   type="text"
                   placeholder="Vehicle Type"
@@ -122,6 +126,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Vehicle Number</div>
                 <input
+                required
                   value={formData.vehicleNumber}
                   type="text"
                   placeholder="Vehicle Number"
@@ -133,6 +138,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               <div className="formGroup1">
                 <div className="label">Joining Date</div>
                 <input
+                required
                   value={formData.joiningDate}
                   type="date"
                   className="inputName"
