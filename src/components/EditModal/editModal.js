@@ -5,8 +5,9 @@ import Modal from "react-bootstrap/Modal";
 import "./editModal.css";
 import { FaRegEdit } from "react-icons/fa";
 
-const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
+const EditModal = ({ showModal, closeModal, id, dataArray, setTableData }) => {
   const [foundObject, setFoundObject] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     const found = dataArray.find((obj) => obj.id === id);
@@ -15,24 +16,40 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
 
   const editChange = (event) => {
     const { name, value } = event.target;
-    setFoundObject(prevState => ({
+    setFoundObject((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
+    }));
+
+    setFormErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
     }));
   };
 
   const deleteEmployee = () => {
-    const updatedArray = dataArray.filter(obj => obj.id !== foundObject.id);
+    const updatedArray = dataArray.filter((obj) => obj.id !== foundObject.id);
     setTableData(updatedArray);
     console.log("Updated Array after deletion:", updatedArray);
     closeModal();
-    
-  }
-
+  };
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const index = dataArray.findIndex(obj => obj.id === foundObject.id);
+    // Check for any empty required fields
+    const errors = {};
+    Object.entries(foundObject).forEach(([key, value]) => {
+      if (String(value).trim() === "") { // Ensure value is always a string
+        errors[key] = "This field is required";
+      }
+    });
+    // If there are errors, set them and prevent form submission
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    // Proceed with editing if there are no errors
+    const index = dataArray.findIndex((obj) => obj.id === foundObject.id);
     if (index !== -1) {
       const updatedArray = [...dataArray];
       updatedArray[index] = foundObject;
@@ -41,7 +58,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
     }
     closeModal();
   };
-
+  
   return (
     <>
       {foundObject && (
@@ -65,25 +82,25 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Driver_ID</div>
                   <input
-                  required
+                    required
                     value={foundObject.driver_ID}
                     placeholder="DRV_001"
                     type="text"
                     className="inputName"
                     name="driver_ID"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
                 <div className="formGroup1">
                   <div className="label">Name</div>
                   <input
-                  required
+                    required
                     value={foundObject.name}
                     type="text"
                     placeholder="Name"
                     className="inputName"
                     name="name"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
               </div>
@@ -91,25 +108,25 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Contact Number</div>
                   <input
-                  required
+                    required
                     value={foundObject.number}
                     type="number"
                     placeholder="9876543210"
                     className="inputName"
                     name="number"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
                 <div className="formGroup1">
                   <div className="label">Vehicle Type</div>
                   <input
-                  required
+                    required
                     value={foundObject.vehicleType}
                     type="text"
                     placeholder="Vehicle Type"
                     className="inputName"
                     name="vehicleType"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
               </div>
@@ -117,24 +134,24 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 <div className="formGroup1">
                   <div className="label">Vehicle Number</div>
                   <input
-                  required
+                    required
                     value={foundObject.vehicleNumber}
                     type="text"
                     placeholder="Vehicle Number"
                     className="inputName"
                     name="vehicleNumber"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
                 <div className="formGroup1">
                   <div className="label">Joining Date</div>
                   <input
-                  required
+                    required
                     value={foundObject.joiningDate}
                     type="date"
                     className="inputName"
                     name="joiningDate"
-                      onChange={editChange}
+                    onChange={editChange}
                   />
                 </div>
               </div>

@@ -155,7 +155,7 @@ const EmployeeInfo = ({ showModal, closeModal, title, onFormSubmit }) => {
               >
                 Close
               </Button>
-              <Button type="submit" className="editButton" onClick={closeModal}>
+              <Button type="submit" className="editButton" >
                 Save
               </Button>
             </Modal.Footer>
