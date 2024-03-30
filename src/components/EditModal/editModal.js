@@ -5,26 +5,13 @@ import Modal from "react-bootstrap/Modal";
 import "./editModal.css";
 import { FaRegEdit } from "react-icons/fa";
 
-const EditModal = ({ showModal, closeModal, id, dataArray }) => {
-  // const [foundObject,setFoundObject] = useState({
-  //     driver_ID: "",
-  //     name: "",
-  //     number: "",
-  //     vehicleType: "",
-  //     vehicleNumber: "",
-  //     joiningDate: "",
-  // })
+const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
   const [foundObject, setFoundObject] = useState(null);
-
-  // let passedArray = dataArray
 
   useEffect(() => {
     const found = dataArray.find((obj) => obj.id === id);
-    // console.log(found);
     setFoundObject(found);
-  }, [id]);
-  console.log(foundObject);
-
+  }, [id, dataArray]);
 
   const editChange = (event) => {
     const { name, value } = event.target;
@@ -32,9 +19,20 @@ const EditModal = ({ showModal, closeModal, id, dataArray }) => {
       ...prevState,
       [name]: value
     }));
-  }
+  };
 
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const index = dataArray.findIndex(obj => obj.id === foundObject.id);
+    if (index !== -1) {
+      const updatedArray = [...dataArray];
+      updatedArray[index] = foundObject;
+      setTableData(updatedArray);
+      console.log("Updated Array:", updatedArray);
+    }
+    closeModal();
+  };
 
   return (
     <>
@@ -137,7 +135,7 @@ const EditModal = ({ showModal, closeModal, id, dataArray }) => {
                 <Button
                   type="submit"
                   className="editButton"
-                  onClick={closeModal}
+                  onClick={handleEdit}
                 >
                   Edit
                 </Button>

@@ -200,6 +200,7 @@ export default function TableData() {
                 closeModal={editModalClose}
                 id={passingID}
                 dataArray={tableData}
+                setTableData={setTableData}
               />
             </div>
           </div>
