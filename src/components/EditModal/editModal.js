@@ -21,6 +21,14 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
     }));
   };
 
+  const deleteEmployee = () => {
+    const updatedArray = dataArray.filter(obj => obj.id !== foundObject.id);
+    setTableData(updatedArray);
+    console.log("Updated Array after deletion:", updatedArray);
+    closeModal();
+    
+  }
+
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -125,6 +133,13 @@ const EditModal = ({ showModal, closeModal, id, dataArray ,setTableData}) => {
                 </div>
               </div>
               <Modal.Footer style={{ backgroundColor: "#e6f0f0" }}>
+                <Button
+                  className="closeButton"
+                  variant="danger"
+                  onClick={deleteEmployee}
+                >
+                  Delete
+                </Button>
                 <Button
                   className="closeButton"
                   variant="secondary"
